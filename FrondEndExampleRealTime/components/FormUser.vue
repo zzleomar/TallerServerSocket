@@ -24,14 +24,6 @@
               <el-form-item label="Status" prop="status">
                   <el-switch v-model="ruleForm.status"></el-switch>
               </el-form-item>
-              <el-form-item label="Hobbies" prop="hobbies">
-                  <el-checkbox-group v-model="ruleForm.hobbies">
-                      <el-checkbox label="Eat" name="type" border></el-checkbox>
-                      <el-checkbox label="Cine" name="type" border></el-checkbox>
-                      <el-checkbox label="Sports" name="type" border></el-checkbox>
-                      <el-checkbox label="Others" name="type" border></el-checkbox>
-                  </el-checkbox-group>
-              </el-form-item>
               <el-form-item label="Note" prop="note">
                   <el-input type="textarea" v-model="ruleForm.note"></el-input>
               </el-form-item>

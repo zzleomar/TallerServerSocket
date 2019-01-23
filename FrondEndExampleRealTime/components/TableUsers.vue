@@ -9,7 +9,6 @@
           <template slot-scope="props">
             <p>Gender: {{ props.row.gender }}</p>
             <p>Birthday: {{ props.row.birthday }}</p>
-            <p class="divaux">Hobbies:<div v-for="(item, index) in props.row.hobbies" :key="index" class="divaux">{{ index==(props.row.hobbies.length-1)?item:item+"," }}</div></p>
             <p>Note: {{ props.row.note }}</p>
           </template>
         </el-table-column>
