@@ -4,16 +4,12 @@ var sequelize = require('../common/conection');
 const UserModel = sequelize.define('users', {
     id: { type:Sequelize.INTEGER.UNSIGNED, primaryKey: true, autoIncrement: true},
     username: Sequelize.STRING,
-    birthday: Sequelize.DATE
-  },{
-        indexes: [
-            {
-                unique: true,
-                fields: ['id']
-            }
-        ],
-    }
-);
+    birthday: Sequelize.DATE,
+    date: Sequelize.DATE,
+    gender: Sequelize.STRING,
+    note: Sequelize.STRING,
+    status: Sequelize.BOOLEAN
+  });
 
 
 var all=function(callback){
@@ -24,17 +20,23 @@ var all=function(callback){
         });
 }
 
-var store=function(user,callback){
+var store=function(data,callback){
     UserModel.create({
-        username:user.username,
-        birthday:new Date()
+        username:data.username,
+        birthday:data.birthday,
+        date:new Date(),
+        gender:data.gender,
+        note:data.note,
+        status:data.status
     }).then((user)=>{
         callback(null,user);
     });
 }
 
 var find=function(id,callback){
-    UserModel.findById(id).then(user => {
+    UserModel.find({
+        where: {id:id }
+    }).then(user => {
         callback(null,user);
     });
 }
