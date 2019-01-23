@@ -17,6 +17,9 @@
     import tabla from "~/components/TableUsers";
     import formUser from "~/components/FormUser";
     export default {
+        created() {
+          this.$store.dispatch('act_load_items');            
+        },
         components:{
             tabla,formUser
         },

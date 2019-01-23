@@ -46,11 +46,12 @@ export default {
     let ctx=this
     vm.$on('edit', function ({row,index}) { 
         ctx.resetForm('ruleForm');
+        ctx.ruleForm.id=row.id;
         ctx.ruleForm.username=row.username;
         ctx.ruleForm.gender=row.gender;
         ctx.ruleForm.birthday=new Date(row.birthday);
         ctx.ruleForm.status=row.status;
-        ctx.ruleForm.hobbies=row.hobbies;
+        // ctx.ruleForm.hobbies=row.hobbies;
         ctx.ruleForm.resource=row.resource;
         ctx.ruleForm.date=row.date;
         ctx.ruleForm.note=row.note;
@@ -65,19 +66,20 @@ export default {
         newtitle: true,
         indexEdit: null,
         ruleForm: {
+          id: '',
           username: '',
           gender: '',
           birthday: '',
           date: '',
           status: false,
-          hobbies: [],
+          // hobbies: [],
           resource: '',
           note: ''
         },
         rules: {
           username: [
             { required: true, message: 'Please input usernaname', trigger: 'blur' },
-            { min: 3, max: 10, message: 'Length should be 3 to 5', trigger: 'blur' }
+            { min: 3, max: 15, message: 'Length should be 3 to 15', trigger: 'blur' }
           ],
           gender: [
             { required: true, message: 'Please select gender', trigger: 'change' }
@@ -88,9 +90,9 @@ export default {
           date: [
             { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
           ],
-          hobbies: [
-            { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
-          ],
+          // hobbies: [
+          //   { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
+          // ],
         }
       };
     },

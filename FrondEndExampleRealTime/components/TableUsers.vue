@@ -15,6 +15,9 @@
         <el-table-column
           label="Creation Date"
           prop="date">
+          <template slot-scope="scope">
+            {{ scope.row.createdAt | moment('YYYY-MM-DD') }}
+          </template>
         </el-table-column>
         <el-table-column
           label="Username"
@@ -24,7 +27,7 @@
           <template slot-scope="scope">
             <el-button-group>
               <el-button type="primary" icon="el-icon-edit" circle @click="edit(scope.row,scope.$index)"></el-button>
-              <el-button type="danger" icon="el-icon-delete" circle @click="remove(scope.$index)"></el-button>
+              <el-button type="danger" icon="el-icon-delete" circle @click="remove(scope.row.id,scope.$index)"></el-button>
             </el-button-group>
           </template>
         </el-table-column>
@@ -62,16 +65,17 @@ import vm from '~/assets/event-bus.js';
         console.log(this.index);
         this.$refs.tableUsers.setCurrentRow(this.index);
       },
-      remove(index){
+      remove(id,index){
+        let ctx=this
         this.$confirm('This will delete the user. Continue?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
           type: 'warning'
         }).then(() => {
-          this.$store.dispatch('act_delete_user', index);
+          ctx.$store.dispatch('act_delete_user', [id,index]);
         }).catch(() => {
-          this.index= null
-          this.currentRow= null       
+          ctx.index= null
+          ctx.currentRow= null       
         });
       }
     },
