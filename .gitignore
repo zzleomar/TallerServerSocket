@@ -1,2 +1,4 @@
 node_modules/
 FrondEndExampleRealTime/.nuxt/
+package-lock.json
+FrondEndExampleRealTime/package-lock.json
