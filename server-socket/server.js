@@ -15,6 +15,7 @@ io.on('connection', (socket) => {
 
   socket.on('event', (msg) => {
     console.log(`message: ${msg}`)
+    socket.broadcast.emit('event_client', msg)
   })
 })
 
