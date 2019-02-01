@@ -21,7 +21,7 @@ module.exports = class EventManager extends EventEmitter {
 
   sub () {
     this.on('event', (message) => {
-      this.ioClient.emit('event', `Mensaje ${message}`)
+      this.ioClient.emit('event', message)
     })
   }
 

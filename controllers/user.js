@@ -16,7 +16,7 @@ function store (req, res) {
     res.json(user)
     const eventManager = new EventManager()
     eventManager.sub()
-    eventManager.pub('Usuario creado con exito')
+    eventManager.pub({ msg: 'Usuario creado con exito', data: user, type: 'store' })
   })
 }
 
@@ -33,7 +33,7 @@ function update (req, res) {
     res.json(user)
     const eventManager = new EventManager()
     eventManager.sub()
-    eventManager.pub('Usuario editado con exito')
+    eventManager.pub({ msg: 'Usuario editado con exito', data: user, type: 'update' })
   })
 }
 
@@ -44,7 +44,7 @@ function remove (req, res) {
     res.json(user)
     const eventManager = new EventManager()
     eventManager.sub()
-    eventManager.pub('Usuario eliminado con exito')
+    eventManager.pub({ msg: 'Usuario eliminado con exito', data: user, type: 'remove' })
   })
 }
 

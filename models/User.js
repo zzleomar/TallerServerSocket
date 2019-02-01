@@ -42,20 +42,28 @@ var find = function (id, callback) {
   })
 }
 
-var update = function (id, user, callback) {
+var update = function (id, user2, callback) {
   UserModel.update(
-    { username: user.username, birthday: user.birthday },
+    { username: user2.username, birthday: user2.birthday },
     { where: { id: id } }
-  ).then(user => {
-    callback(null, user)
+  ).then(response => {
+    if (response !== 0) {
+      callback(null, user2)
+    } else {
+      callback(null, 0)
+    }
   })
 }
 
 var remove = function (id, callback) {
   UserModel.destroy({
     where: { id: id }
-  }).then(user => {
-    callback(null, user)
+  }).then(response => {
+    if (response !== 0) {
+      callback(null, id)
+    } else {
+      callback(null, 0)
+    }
   })
 }
 

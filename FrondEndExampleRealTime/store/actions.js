@@ -38,13 +38,7 @@ const actions = {
     axios
       .post(url_api + '/user', user)
       .then(response => {
-        Store.commit('mut_new_user', response.data)
-        vm.$notify({
-          title: 'Success',
-          message: 'New User Addede',
-          type: 'success',
-          offset: 20
-        })
+        console.log('send created')
       })
       .catch(error => {
         console.log(error)
@@ -71,14 +65,9 @@ const actions = {
     axios
       .put(url_api + '/user/' + user.id, user)
       .then(response => {
-        if (response.data[0]) {
-          Store.commit('mut_edit_user', [user, index])
-          vm.$notify({
-            title: 'Success',
-            message: 'Update User',
-            type: 'success',
-            offset: 20
-          })
+        console.log(response.data)
+        if (response) {
+          console.log('algo hay')
         } else {
           vm.$notify({
             title: 'Error',
@@ -102,13 +91,7 @@ const actions = {
     axios
       .delete(url_api + '/user/' + id)
       .then(response => {
-        Store.commit('mut_delete_user', index)
-        vm.$notify({
-          title: 'Success',
-          message: 'Delete User',
-          type: 'success',
-          offset: 20
-        })
+        console.log(response)
       })
       .catch(error => {
         console.log(error)
@@ -119,6 +102,36 @@ const actions = {
           offset: 20
         })
       })
+  },
+
+  act_socket_new_user: (Store, data) => {
+    Store.commit('mut_new_user', data)
+    vm.$notify({
+      title: 'Success',
+      message: 'New User Addede',
+      type: 'success',
+      offset: 20
+    })
+  },
+
+  act_socket_delete_user: (Store, data) => {
+    Store.commit('mut_socket_delete_user', data)
+    vm.$notify({
+      title: 'Success',
+      message: 'Delete User',
+      type: 'success',
+      offset: 20
+    })
+  },
+
+  act_socket_update_user: (Store, data) => {
+    Store.commit('mut_socket_update_user', data)
+    vm.$notify({
+      title: 'Success',
+      message: 'Update User',
+      type: 'success',
+      offset: 20
+    })
   }
 }
 

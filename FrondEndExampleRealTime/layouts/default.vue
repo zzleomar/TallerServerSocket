@@ -24,6 +24,9 @@
   </div>
 </template>
 <script>
+import socketC from 'socket.io-client'
+var url = `http://${process.env.IP_SOCKET}:${process.env.PORT_SOCKET}`
+const ioClinet = socketC(url)
 export default {
   data () {
     return {
@@ -36,6 +39,24 @@ export default {
     }
   },
   created () {
+    ioClinet.on('event_client', (obj) => {
+      console.log(obj)
+      switch (obj.type) {
+        case 'store':
+          this.$store.dispatch('act_socket_new_user', obj.data)
+          break
+        case 'update':
+          this.$store.dispatch('act_socket_update_user', obj.data)
+          break
+        case 'remove':
+          this.$store.dispatch('act_socket_delete_user', obj.data)
+          break
+        default:
+          console.log(obj)
+          break
+      }
+      console.log('prueba de client')
+    })
     /* eslint-disable no-undef */
     // eslint-disable-next-line eqeqeq
     this.activeIndex = $nuxt.$route.path == '/users' ? '2' : '1'
