@@ -3,6 +3,7 @@ var bodyParser = require('body-parser')
 var cors = require('cors')
 
 app.use(cors())
+
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({

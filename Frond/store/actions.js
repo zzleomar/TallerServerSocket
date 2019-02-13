@@ -1,15 +1,14 @@
 import vm from '~/assets/event-bus.js'
-import conf from '~/assets/config.js'
 import axios from 'axios'
 
-/* eslint-disable camelcase */
-const url_api = conf.url_server + conf.urlApi
+axios.defaults.crossDomain = true
+axios.defaults.baseURL = process.env.URL_API + '/api'
 
 const actions = {
   // landing
   act_load_items: Store => {
     axios
-      .get(url_api + '/user')
+      .get('/user')
       .then(response => {
         console.log(response.data)
         Store.commit('mut_items', response.data)
@@ -36,8 +35,14 @@ const actions = {
       note: data.note
     }
     axios
-      .post(url_api + '/user', user)
+      .post('/user', user)
       .then(response => {
+        vm.$notify({
+          title: 'Info',
+          message: 'Send Data',
+          type: 'info',
+          offset: 5
+        })
         console.log('send created')
       })
       .catch(error => {
@@ -63,7 +68,7 @@ const actions = {
       note: data.note
     }
     axios
-      .put(url_api + '/user/' + user.id, user)
+      .put('/user/' + user.id, user)
       .then(response => {
         console.log(response.data)
         if (response) {
@@ -89,7 +94,7 @@ const actions = {
   },
   act_delete_user: (Store, [id, index]) => {
     axios
-      .delete(url_api + '/user/' + id)
+      .delete('/user/' + id)
       .then(response => {
         console.log(response)
       })
