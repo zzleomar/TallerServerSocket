@@ -2,6 +2,11 @@
     "name": "socket-server",
     "version": "0.0.1",
     "description": "my firts socket.io server",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node bin/www",
+        "dev": "node server.js"
+      },
     "dependencies": {
         "dotenv": "^6.2.0",
         "express": "^4.16.4",
